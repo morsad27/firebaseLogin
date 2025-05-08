@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "872460555466",
+    "project_id": "loginfirebase-90297",
+    "storage_bucket": "loginfirebase-90297.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872460555466:android:05a412093eb554cebbd033",
+        "android_client_info": {
+          "package_name": "com.morsad.recipeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872460555466-3ieshlntrehb9rd5bgusscultm2hf07h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsCyWiOAPjbq5gy8jinH9pNYoD6od0ED0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872460555466-3ieshlntrehb9rd5bgusscultm2hf07h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
