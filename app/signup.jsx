@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -46,8 +46,8 @@ const landingPage = () => {
     setLoading(false);
   };
 
-  const register = () => {
-    router.replace("/signup");
+  const login = () => {
+    router.replace("/");
   };
   return (
     <View style={styles.container}>
@@ -62,7 +62,7 @@ const landingPage = () => {
         source={require("../assets/images/logo.png")}
         style={styles.logo}
       />
-      <Text style={styles.text}>Welcome back</Text>
+      <Text style={styles.text}>Create account</Text>
       <View style={{ marginBottom: 20 }}>
         <TextInput
           autoCapitalize="none"
@@ -81,17 +81,16 @@ const landingPage = () => {
         />
       </View>
       <View style={styles.row}>
-        <Text style={styles.greyText}> Don't have an account? </Text>
-        <Text style={styles.blueText} onPress={register}>
-          {" "}
-          Signup{" "}
+        <Text style={styles.greyText}> Already have an account? </Text>
+        <Text style={styles.blueText} onPress={login}>
+          Login
         </Text>
       </View>
       <TouchableOpacity
-        onPress={signIn}
+        onPress={signUp}
         style={[defaultStyles.btn, styles.btnPrimary]}
       >
-        <Text style={styles.btnPrimaryText}>Login</Text>
+        <Text style={styles.btnPrimaryText}>Signup</Text>
       </TouchableOpacity>
     </View>
   );
