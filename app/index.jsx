@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import AnimatedIntro from "@/components/animatedIntro";
+import LandingPage from "@/components/landingPage";
 import BottomLoginSheet from "@/components/bottomLogin";
 
 export default function Index() {
@@ -9,7 +9,7 @@ return (
         flex: 1,
       }}
     >
-      <AnimatedIntro />
+      <LandingPage />
       <BottomLoginSheet />
     </View>
   );
