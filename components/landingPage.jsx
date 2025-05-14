@@ -1,4 +1,5 @@
-import React from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -8,8 +9,40 @@ import {
   View,
 } from "react-native";
 import { defaultStyles } from "../constants/Styles";
+import { FIREBASE_AUTH } from "../firebase.client";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const landingPage = () => {
+  const { type } = useLocalSearchParams;
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = FIREBASE_AUTH;
+
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      if (user) router.replace("/(tabs)/home");
+    } catch (error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+    }
+    setLoading(false);
+  };
+
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      if (user) router.replace("/(tabs)/home");
+    } catch (error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+    }
+    setLoading(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -29,15 +62,15 @@ const landingPage = () => {
           autoCapitalize="none"
           placeholder="Email"
           style={styles.inputField}
-          // value={email}
-          // onChangeText={setEmail}
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           autoCapitalize="none"
           placeholder="Password"
           style={styles.inputField}
-          // value={password}
-          // onChangeText={setPassword}
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry
         />
       </View>
@@ -45,7 +78,7 @@ const landingPage = () => {
         <Text style={styles.greyText}> Don't have an account? </Text>
         <Text style={styles.blueText}> Signup </Text>
       </View>
-      <TouchableOpacity style={[defaultStyles.btn, styles.btnPrimary]}>
+      <TouchableOpacity onPress={signIn} style={[defaultStyles.btn, styles.btnPrimary]}>
         <Text style={styles.btnPrimaryText}>Login</Text>
       </TouchableOpacity>
     </View>
@@ -60,7 +93,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignContent: "center",
     alignSelf: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   textLogin: {
     color: "#000",
