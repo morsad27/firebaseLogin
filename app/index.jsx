@@ -1,16 +1,19 @@
-import { Text, View } from "react-native";
 import LandingPage from "@/components/landingPage";
-import BottomLoginSheet from "@/components/bottomLogin";
+import { StatusBar, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Index() {
-return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <LandingPage />
-      <BottomLoginSheet />
-    </View>
+  return (
+    <SafeAreaProvider>
+      <StatusBar type="dark" backgroundColor="#121212"/>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <LandingPage />
+        {/* <BottomLoginSheet /> */}
+      </View>
+    </SafeAreaProvider>
   );
 }
