@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   createUserWithEmailAndPassword,
@@ -83,8 +84,7 @@ const landingPage = () => {
       <View style={styles.row}>
         <Text style={styles.greyText}> Don't have an account? </Text>
         <Text style={styles.blueText} onPress={register}>
-          {" "}
-          Signup{" "}
+          Signup
         </Text>
       </View>
       <TouchableOpacity
@@ -92,6 +92,16 @@ const landingPage = () => {
         style={[defaultStyles.btn, styles.btnPrimary]}
       >
         <Text style={styles.btnPrimaryText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[defaultStyles.btn, styles.btnDark]}>
+        <Ionicons
+          name="logo-google"
+          size={20}
+          style={styles.btnIcon}
+          color={"#000"}
+        />
+        <Text style={styles.btnDarkText}>Continue with Google</Text>
       </TouchableOpacity>
     </View>
   );
@@ -157,5 +167,12 @@ const styles = StyleSheet.create({
   btnPrimaryText: {
     color: "#fff",
     fontSize: 16,
+  },
+  btnDarkText: {
+    color: "#000",
+    fontSize: 20,
+  },
+  btnIcon: {
+    paddingRight: 7,
   },
 });
