@@ -1,71 +1,81 @@
-import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator, Image, TextInput, TouchableOpacity, Alert } from 'react-native'
-import React, { useState } from 'react'
-import { useLocalSearchParams } from 'expo-router'
-import { defaultStyles } from '../constants/Styles'
-import { FIREBASE_AUTH } from '../firebase.client'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { router } from 'expo-router';
-
+import { router, useLocalSearchParams } from "expo-router";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useState } from "react";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { defaultStyles } from "../constants/Styles";
+import { FIREBASE_AUTH } from "../firebase.client";
 
 const Page = () => {
-  const { type } = useLocalSearchParams('');
+  const { type } = useLocalSearchParams("");
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const auth = FIREBASE_AUTH;
 
   const signIn = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password)
-      if (user) router.replace('/(tabs)/home')
-    } catch (error) { 
-      console.log(error)
-      alert('Sign in failed: ' + error.message);
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      if (user) router.replace("/(tabs)/home");
+    } catch (error) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const signUp = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password)
-      if (user) router.replace('/(tabs)/home')
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      if (user) router.replace("/(tabs)/home");
     } catch (error) {
-      console.log(error)
-      alert('Sign in failed: ' + error.message);
+      console.log(error);
+      alert("Sign in failed: " + error.message);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
       style={styles.container}
       keyboardVerticalOffset={1}
     >
       {loading && (
         <View style={defaultStyles.loadingOverlay}>
-          <ActivityIndicator size='large' color='#fff'/>
+          <ActivityIndicator size="large" color="#fff" />
         </View>
       )}
       {/* <Image style={styles.logo} source={require('../assets/images/logo-white.png')} /> */}
 
       <Text style={styles.title}>
-        {type === 'login' ? 'Welcome back' : 'Create your account'}
+        {type === "login" ? "Welcome back" : "Create your account"}
       </Text>
 
-      <View style={{marginBottom: 20 }}>
+      <View style={{ marginBottom: 20 }}>
         <TextInput
-          autoCapitalize='none'
-          placeholder='Email'
+          autoCapitalize="none"
+          placeholder="Email"
           style={styles.inputField}
           value={email}
           onChangeText={setEmail}
         />
         <TextInput
-          autoCapitalize='none'
-          placeholder='Password'
+          autoCapitalize="none"
+          placeholder="Password"
           style={styles.inputField}
           value={password}
           onChangeText={setPassword}
@@ -73,19 +83,36 @@ const Page = () => {
         />
       </View>
 
-      {type === 'login' ? (
-        <TouchableOpacity onPress={signIn} style={[defaultStyles.btn, styles.btnPrimary]}>
+      {type === "login" ? (
+        <TouchableOpacity
+          onPress={signIn}
+          style={[defaultStyles.btn, styles.btnPrimary]}
+        >
           <Text style={styles.btnPrimaryText}>Login</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={signUp} style={[defaultStyles.btn, styles.btnPrimary]}>
+        <TouchableOpacity
+          onPress={signUp}
+          style={[defaultStyles.btn, styles.btnPrimary]}
+        >
           <Text style={styles.btnPrimaryText}>Create acount</Text>
         </TouchableOpacity>
       )}
-
+      <TouchableOpacity style={[defaultStyles.btn, styles.btnDark]}>
+        <Text style={styles.btnDarkText}>
+          Continue with{" "}
+          <Text style={{ color: "#4285f4" }}>
+            G<Text style={{ color: "#EA4336" }}>O</Text>
+            <Text style={{ color: "#FBBC04" }}>O</Text>
+            <Text style={{ color: "#4285F4" }}>G</Text>
+            <Text style={{ color: "#34A853" }}>L</Text>
+            <Text style={{ color: "#EA4336" }}>E</Text>
+          </Text>
+        </Text>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -95,31 +122,31 @@ const styles = StyleSheet.create({
   logo: {
     width: 60,
     height: 60,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginVertical: 80,
   },
   title: {
     fontSize: 30,
-    alignSelf: 'center',
-    fontWeight: 'bold',
+    alignSelf: "center",
+    fontWeight: "bold",
   },
   inputField: {
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 12,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   btnPrimary: {
     backgroundColor: "#007bff",
     marginVertical: 4,
   },
   btnPrimaryText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-  }
-})
+  },
+});
 
 export default Page;

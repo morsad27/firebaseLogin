@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   createUserWithEmailAndPassword,
@@ -16,7 +15,7 @@ import {
 import { defaultStyles } from "../constants/Styles";
 import { FIREBASE_AUTH } from "../firebase.client";
 
-const landingPage = () => {
+const landingPage = ({ promptAsync }) => {
   const { type } = useLocalSearchParams;
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -94,14 +93,17 @@ const landingPage = () => {
         <Text style={styles.btnPrimaryText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[defaultStyles.btn, styles.btnDark]}>
-        <Ionicons
-          name="logo-google"
-          size={20}
-          style={styles.btnIcon}
-          color={"#000"}
-        />
-        <Text style={styles.btnDarkText}>Continue with Google</Text>
+      <TouchableOpacity style={[defaultStyles.btn, styles.btnDark]} onPress={() => promptAsync()}>
+        <Text style={{ fontSize: 18, fontWeight: "500" }}>
+          Continue with{" "}
+          <Text style={{ color: "#4285f4" }}>
+            G<Text style={{ color: "#EA4336" }}>o</Text>
+            <Text style={{ color: "#FBBC04" }}>o</Text>
+            <Text style={{ color: "#4285F4" }}>g</Text>
+            <Text style={{ color: "#34A853" }}>l</Text>
+            <Text style={{ color: "#EA4336" }}>e</Text>
+          </Text>
+        </Text>
       </TouchableOpacity>
     </View>
   );
