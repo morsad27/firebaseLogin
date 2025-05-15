@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   createUserWithEmailAndPassword,
@@ -92,6 +93,16 @@ const landingPage = () => {
         style={[defaultStyles.btn, styles.btnPrimary]}
       >
         <Text style={styles.btnPrimaryText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[defaultStyles.btn, styles.btnDark]}>
+        <Ionicons
+          name="logo-google"
+          size={16}
+          style={styles.btnIcon}
+          color={"#fff"}
+        />
+        <Text style={styles.btnDarkText}>Continue with Google</Text>
       </TouchableOpacity>
     </View>
   );
